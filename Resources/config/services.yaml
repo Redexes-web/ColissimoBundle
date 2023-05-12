@@ -6,6 +6,7 @@ services:
             $credentials: '%cleverage_colissimo.auth%'
             $sender: '%cleverage_colissimo.letter.sender%'
             $service: '%cleverage_colissimo.letter.service%'
+            $labelUploadDir: '%cleverage_colissimo.labelUploadDir%'
 
     CleverAge\ColissimoBundle\:
         resource: '../../'

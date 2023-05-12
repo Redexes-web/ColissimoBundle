@@ -15,6 +15,7 @@ abstract class AbstractService
     protected array $credentials;
     protected array $sender;
     protected array $service;
+    protected ?string $labelUploadDir;
 
     public function __construct(
         ColissimoClient $colissimoClient,
@@ -22,7 +23,8 @@ abstract class AbstractService
         SlsResponseParser $slsResponseParser,
         array $credentials,
         array $sender,
-        array $service
+        array $service,
+        string $labelUploadDir = null
     ) {
         $this->colissimoClient = $colissimoClient;
         $this->validator = $validator;
@@ -30,6 +32,7 @@ abstract class AbstractService
         $this->credentials = $credentials;
         $this->sender = $sender;
         $this->service = $service;
+        $this->labelUploadDir = $labelUploadDir;
     }
 
     protected function doCall(
@@ -44,9 +47,7 @@ abstract class AbstractService
         if (!method_exists($this->colissimoClient, $method)) {
             throw new MethodNotAllowedException(['GET', 'POST'], 'Please provide an allowed http method.');
         }
-
         $response = $this->colissimoClient->$method($url, $params, $customCredentials);
-
         // For SlsService or tracking timeline we can not transform the response in xml element
         // because it's just a simple string.
         // So let's parse them.
@@ -55,7 +56,6 @@ abstract class AbstractService
         }
 
         $xml = new \SimpleXMLElement($response->getContent());
-
         $return = $xml->xpath('//return');
         if (count($return) && (int) $return[0]->errorCode !== 0) {
             $this->parseErrorCodeAndThrow((int) $return[0]->errorCode);

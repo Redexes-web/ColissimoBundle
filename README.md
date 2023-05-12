@@ -52,6 +52,7 @@ clever_age_colissimo:
       countryCode: 'FR'
       zipCode: '33300'
       city: 'Bordeaux'
+  labelUploadDir: '%kernel.project_dir%/upload/label'
 ```
 
 ## Usage examples :
@@ -209,6 +210,7 @@ class ShippingController extends AbstractController
         echo $shipping->getPdfUrl(); // null or the pdf url.
         echo $shipping->getParcelNumberPartner(); // null or the parcel number partner.
         echo $shipping->getFields(); // Array of custom fields.
+        echo $shipping->getLabelFilePath(); // relative path of the label file
         
         // ...
     }

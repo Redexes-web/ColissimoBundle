@@ -9,6 +9,7 @@ class LabelResponse extends BaseResponseModel
     private string $parcelNumber;
     private ?string $parcelNumberPartner = null;
     private ?string $pdfUrl = null;
+    private ?string $labelFilePath = null;
     private array $fields;
 
     public function getParcelNumber(): string
@@ -38,6 +39,17 @@ class LabelResponse extends BaseResponseModel
     public function getPdfUrl(): ?string
     {
         return $this->pdfUrl;
+    }
+
+    public function setLabelFilePath(?string $labelFilePath): LabelResponse
+    {
+        $this->labelFilePath = $labelFilePath;
+
+        return $this;
+    }
+    public function getLabelFilePath(): ?string
+    {
+        return $this->labelFilePath;
     }
 
     public function setPdfUrl(?string $pdfUrl): LabelResponse

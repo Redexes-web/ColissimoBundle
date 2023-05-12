@@ -13,6 +13,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode = $builder->getRootNode();
         $rootNode->children()
+            ->scalarNode('labelUploadDir')->isRequired()->cannotBeEmpty()->end()
             ->scalarNode('testModeEnabled')->isRequired()->cannotBeEmpty()->end()
             ->arrayNode('auth')->isRequired()
                 ->children()

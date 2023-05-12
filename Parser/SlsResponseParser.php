@@ -6,6 +6,7 @@ class SlsResponseParser implements ParserInterface
 {
     public function parse(string $response): array
     {
+        // dd(json_decode($response, true), $response);
         if (0 === preg_match_all('~--uuid:[a-zA-Z0-9-]+~', $response, $matches, PREG_OFFSET_CAPTURE)) {
             $responses = [[
                 'headers' => [
@@ -22,6 +23,7 @@ class SlsResponseParser implements ParserInterface
                 $start = $uuids[$i][1] + strlen($uuids[$i][0]) + 2;
                 $parts[] = substr($response, $start, $uuids[$i + 1][1] - $start);
             }
+            dump($parts);
 
             $responses = [];
             foreach ($parts as $part) {
@@ -32,10 +34,11 @@ class SlsResponseParser implements ParserInterface
                     list($key, $value) = explode(':', $line);
                     $headers[trim($key)] = trim($value);
                 }
+                // dd($response);
 
                 $responses[] = [
                     'headers' => $headers,
-                    'body' => json_decode($body, true),
+                    'body' => json_decode($body, true) ?? $body,
                 ];
             }
         }

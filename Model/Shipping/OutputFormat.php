@@ -52,4 +52,13 @@ class OutputFormat
             'outputPrintingType' => $this->getOutputPrintingType(),
         ];
     }
+
+    public function populate(array $data): OutputFormat
+    {
+        $this->setX($data['x']);
+        $this->setY($data['y']);
+        $this->outputPrintingType = $data['outputPrintingType'];
+
+        return $this;
+    }
 }

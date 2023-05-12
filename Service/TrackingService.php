@@ -44,7 +44,6 @@ class TrackingService extends AbstractService
     public function parseResponse($response): TrackingResponse
     {
         $responses = $this->slsResponseParser->parse($response);
-
         $body = $responses[0]['body'];
         $status = $body['status'][0];
         if ($status['code'] !== "0") {
@@ -54,11 +53,11 @@ class TrackingService extends AbstractService
         $parcel = $body['parcel'];
 
         $trackingResponse = new TrackingResponse();
+        // $parcel['removalPoint'] = $parcel['removalPoint'] ?? [];
         $trackingResponse->setLang($body['lang'])
             ->setParcel((new ParcelResponse())->populate($parcel));
 
         $trackingResponse->getParcel()->setDeliveryChoice($parcel['service']['deliveryChoice']);
-
         return $trackingResponse;
     }
 

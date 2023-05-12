@@ -20,6 +20,7 @@ class CleverAgeColissimoExtension extends Extension implements PrependExtensionI
         $container->setParameter('cleverage_colissimo.auth', $config['auth']);
         $container->setParameter('cleverage_colissimo.letter.service', $config['letter']['service']);
         $container->setParameter('cleverage_colissimo.letter.sender', $config['letter']['sender']);
+        $container->setParameter('cleverage_colissimo.labelUploadDir', $config['labelUploadDir']);
     }
 
     public function prepend(ContainerBuilder $container): void {}
