@@ -10,7 +10,7 @@ class LabelResponse extends BaseResponseModel
     private ?string $parcelNumberPartner = null;
     private ?string $pdfUrl = null;
     private ?string $labelFilePath = null;
-    private array $fields = [];
+    private ?array $fields = [];
 
     public function getParcelNumber(): string
     {
