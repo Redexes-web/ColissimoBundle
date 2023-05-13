@@ -4,10 +4,23 @@ namespace CleverAge\ColissimoBundle\Model\Shipping\Letter;
 
 class Addressee extends BaseAddress
 {
+    private ?string $companyName = null;
     private string $lastName;
     private string $firstName;
     private ?string $mobileNumber = null;
     private ?string $email = null;
+
+    public function getCompanyName(): ?string
+    {
+        return $this->companyName;
+    }
+
+    public function setCompanyName(?string $companyName): Addressee
+    {
+        $this->companyName = $companyName;
+
+        return $this;
+    }
 
     public function getLastName(): string
     {
@@ -70,6 +83,10 @@ class Addressee extends BaseAddress
 
         if ($email = $this->getEmail()) {
             $base['email'] = $email;
+        }
+
+        if ($companyName = $this->getCompanyName()) {
+            $base['companyName'] = $companyName;
         }
 
         return array_merge($base, parent::toArray());
