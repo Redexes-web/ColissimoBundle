@@ -23,7 +23,6 @@ class SlsResponseParser implements ParserInterface
                 $start = $uuids[$i][1] + strlen($uuids[$i][0]) + 2;
                 $parts[] = substr($response, $start, $uuids[$i + 1][1] - $start);
             }
-            dump($parts);
 
             $responses = [];
             foreach ($parts as $part) {
